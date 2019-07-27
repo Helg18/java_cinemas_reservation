@@ -13,7 +13,8 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long room_id;
+    @ManyToOne(targetEntity = Room.class)
+    private Room room;
     private Integer row;
     private Integer col;
     private Boolean status;
@@ -25,8 +26,8 @@ public class Seat {
 
     public Seat() {}
 
-    public Seat(Long room_id, Integer row, Integer col, Boolean status) {
-        this.room_id = room_id;
+    public Seat(Room room, Integer row, Integer col, Boolean status) {
+        this.room = room;
         this.row = row;
         this.col = col;
         this.status = status;
@@ -44,12 +45,12 @@ public class Seat {
         return updated_at;
     }
 
-    public Long getRoom_id() {
-        return room_id;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setRoom_id(Long room_id) {
-        this.room_id = room_id;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public Integer getRow() {
