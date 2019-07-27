@@ -4,10 +4,7 @@ import henryleon.cinemasreservation.Models.Reservation;
 import henryleon.cinemasreservation.Repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,4 +24,10 @@ public class ReservationController {
     public List<Reservation> getAllReservations() {
         return this.reservationRepository.findAll();
     }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public Reservation create(@RequestBody Reservation reservation) {
+        return this.reservationRepository.save(reservation);
+    }
+
 }
