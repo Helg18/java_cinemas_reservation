@@ -16,6 +16,8 @@ import java.util.List;
 @EnableAutoConfiguration
 @RequestMapping(value = "rooms")
 public class RoomController {
+
+    @Autowired
     private RoomRepository roomRepository;
 
     @Autowired
