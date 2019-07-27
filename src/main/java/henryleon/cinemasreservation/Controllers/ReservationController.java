@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -30,4 +31,8 @@ public class ReservationController {
         return this.reservationRepository.save(reservation);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Optional<Reservation> show(@PathVariable Long id) {
+        return this.reservationRepository.findById(id);
+    }
 }
