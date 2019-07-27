@@ -35,4 +35,18 @@ public class ReservationController {
     public Optional<Reservation> show(@PathVariable Long id) {
         return this.reservationRepository.findById(id);
     }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public List<Reservation> update(@PathVariable Long id, @RequestBody Reservation reservation) {
+        Optional<Reservation> optionalRoom = this.reservationRepository.findById(id);
+        if (optionalRoom.isPresent()) {
+            Reservation r = optionalRoom.get();
+            r.setDate(reservation.getDate());
+            r.setStatus(reservation.getStatus());
+            r.setTime(reservation.getTime());
+
+            this.reservationRepository.save(r);
+        }
+        return this.reservationRepository.findAll();
+    }
 }
