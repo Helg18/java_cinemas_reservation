@@ -1,13 +1,12 @@
 package henryleon.cinemasreservation.Controllers;
 
+import henryleon.cinemasreservation.Models.Seat;
 import henryleon.cinemasreservation.Repositories.SeatRepository;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -23,5 +22,10 @@ public class SeatController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List getAllSeats() {
         return this.seatRepository.findAll();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Optional<Seat> show(@PathVariable Long id) {
+        return this.seatRepository.findById(id);
     }
 }
