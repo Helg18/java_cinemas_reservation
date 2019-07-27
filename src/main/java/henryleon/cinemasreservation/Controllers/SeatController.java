@@ -48,4 +48,10 @@ public class SeatController {
         }
         return this.seatRepository.findAll();
     }
+
+    @RequestMapping(value = "/id", method = RequestMethod.DELETE)
+    public List delete(@PathVariable Long id) {
+        this.seatRepository.deleteById(id);
+        return this.seatRepository.findAll();
+    }
 }
