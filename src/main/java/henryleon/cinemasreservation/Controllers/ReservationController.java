@@ -49,4 +49,13 @@ public class ReservationController {
         }
         return this.reservationRepository.findAll();
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public List<Reservation> destroy(@PathVariable Long id) {
+        Optional<Reservation> optionalRoom = this.reservationRepository.findById(id);
+        if (optionalRoom.isPresent()) {
+            this.reservationRepository.deleteById(id);
+        }
+        return this.reservationRepository.findAll();
+    }
 }
