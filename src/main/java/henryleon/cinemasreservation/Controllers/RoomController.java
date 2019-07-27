@@ -43,4 +43,13 @@ public class RoomController {
         }
         return this.roomRepository.findAll();
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public List<Room> destroy(@PathVariable Long id) {
+        Optional<Room> optionalRoom = this.roomRepository.findById(id);
+        if (optionalRoom.isPresent()) {
+            this.roomRepository.deleteById(id);
+        }
+        return this.roomRepository.findAll();
+    }
 }
