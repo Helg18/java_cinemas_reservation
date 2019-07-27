@@ -1,13 +1,19 @@
 package henryleon.cinemasreservation.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "rooms")
+@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property = "@seats")
 public class Room {
 
     @Id
@@ -15,6 +21,9 @@ public class Room {
     private Long id;
     private String name;
     private Boolean status;
+
+    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
+    private List<Seat> seats;
 
     @CreationTimestamp
     private Date created_at;
@@ -59,5 +68,13 @@ public class Room {
 
     public Date getUpdated_at() {
         return updated_at;
+    }
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 }

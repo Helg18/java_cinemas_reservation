@@ -1,5 +1,6 @@
 package henryleon.cinemasreservation.Models;
 
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,16 +9,18 @@ import java.util.Date;
 
 @Entity
 @Table(name = "seats")
+@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property = "@room")
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(targetEntity = Room.class)
-    private Room room;
     private Integer row;
     private Integer col;
     private Boolean status;
+
+    @ManyToOne(targetEntity = Room.class, fetch = FetchType.EAGER)
+    private Room room;
 
     @CreationTimestamp
     private Date created_at;
