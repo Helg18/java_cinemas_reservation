@@ -29,6 +29,11 @@ public class SeatController {
         return this.seatRepository.findById(id);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public Seat create(@RequestBody Seat seat) {
+        return this.seatRepository.save(seat);
+    }
+
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public List update(@PathVariable Long id, @RequestBody Seat newSeat) {
         Optional<Seat> optionalSeat = this.seatRepository.findById(id);
