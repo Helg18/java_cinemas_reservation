@@ -31,4 +31,16 @@ public class RoomController {
     public Optional<Room> show(@PathVariable Long id) {
         return this.roomRepository.findById(id);
     }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public List<Room> update(@PathVariable Long id, @RequestBody Room room) {
+        Optional<Room> optionalRoom = this.roomRepository.findById(id);
+        if (optionalRoom.isPresent()) {
+            Room r = optionalRoom.get();
+            r.setName(room.getName());
+            r.setStatus(room.getStatus());
+            this.roomRepository.save(r);
+        }
+        return this.roomRepository.findAll();
+    }
 }
