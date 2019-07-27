@@ -27,6 +27,11 @@ public class RoomController {
         return this.roomRepository.findAll();
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public Room create(@RequestBody Room room) {
+        return this.roomRepository.save(room);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Optional<Room> show(@PathVariable Long id) {
         return this.roomRepository.findById(id);
