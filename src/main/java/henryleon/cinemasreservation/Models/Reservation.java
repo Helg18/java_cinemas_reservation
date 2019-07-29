@@ -20,7 +20,7 @@ public class Reservation {
     private Date created_at;
 
     @UpdateTimestamp
-    private Date update_at;
+    private Date updated_at;
 
     public Reservation() { }
 
@@ -32,14 +32,6 @@ public class Reservation {
 
     public Long getId() {
         return id;
-    }
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public Date getUpdate_at() {
-        return update_at;
     }
 
     public Date getDate() {
@@ -65,4 +57,10 @@ public class Reservation {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+    public Date getCreated_at() {
+        return this.created_at;
+    }
+
+    public Date getUpdated_at() { return this.updated_at; }
 }

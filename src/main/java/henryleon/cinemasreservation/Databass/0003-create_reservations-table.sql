@@ -5,7 +5,7 @@ create table reservations
     time time not null,
     status boolean default true not null,
     created_at datetime default now() null,
-    updated_at datetime null,
+    updated_at datetime default now() null,
     constraint reservations_pk
         primary key (id)
 );
