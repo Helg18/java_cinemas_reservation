@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "reservations")
@@ -15,6 +16,10 @@ public class Reservation {
     private Date date;
     private Date time;
     private Boolean status;
+
+    @ManyToMany(targetEntity = Seat.class)
+    @JoinColumn(name="seat_id", referencedColumnName="seat_id")
+    private List<Seat> seats;
 
     @CreationTimestamp
     private Date created_at;
@@ -63,4 +68,12 @@ public class Reservation {
     }
 
     public Date getUpdated_at() { return this.updated_at; }
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+    }
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "seats")
@@ -18,6 +19,10 @@ public class Seat {
     private Integer row;
     private Integer col;
     private Boolean status;
+
+    @ManyToMany(targetEntity = Reservation.class)
+    @JoinColumn(name="reservations_id", referencedColumnName="reservations_id")
+    private List<Reservation> reservations;
 
     @ManyToOne(targetEntity = Room.class, fetch = FetchType.EAGER)
     private Room room;
@@ -78,5 +83,13 @@ public class Seat {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }
